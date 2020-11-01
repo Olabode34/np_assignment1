@@ -29,6 +29,7 @@ int main(int argc , char *argv[])
 		socklen_t clilen;
 		
 		sockfd = socket(AF_INET , SOCK_STREAM , 0);
+		printf("[+]Server Socket Created Sucessfully.\n");
 		if(sockfd < 0)
 		{
 				error("Error opening Socket.");
@@ -43,11 +44,16 @@ int main(int argc , char *argv[])
 		
 		if(bind(sockfd , (struct sockaddr *) &serv_addr , sizeof(serv_addr)) < 0)
 				error("Binding Failed.");
+		printf("[+]Bind to Port number %d.\n", 7500);
 
                 listen(sockfd , 5);
+		printf("[+]Listening...\n");
 		clilen = sizeof(cli_addr);
 		
 		newsockfd = accept(sockfd , (struct sockaddr *) &cli_addr , &clilen);
+		
+		strcpy(buffer, "TEXT TCP 1.0\n""TEXT TCP 1.0\n");
+	        send(newsockfd, buffer, strlen(buffer), 0);
 		
 		if(newsockfd < 0)
 		error("Error on Accept");
