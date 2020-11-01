@@ -44,7 +44,7 @@ int main(int argc , char *argv[])
 		if(bind(sockfd , (struct sockaddr *) &serv_addr , sizeof(serv_addr)) < 0)
 				error("Binding Failed.");
 
-listen(sockfd , 5);
+                listen(sockfd , 5);
 		clilen = sizeof(cli_addr);
 		
 		newsockfd = accept(sockfd , (struct sockaddr *) &cli_addr , &clilen);
